@@ -1,14 +1,25 @@
-name: Mi priemra integración continua
+name: My first CI/CD pipeline
 
 on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: empaquetado
-      run: echo "Empaquetando la aplicación!"
+    - name: Download repository
+      uses: actions/checkout@v2
+    - name: Install JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+        distribution: 'adopt'
+    - name: Build with Maven
+      run: mvn clean package -DskipTests
+    - name: Upload package .jar to deploy later
+      uses: actions/upload-artifact@v2
+      with:
+        name: moviecards-java
+        path: "${{ github.workspace }}/target/*.jar"
 
   test:
     needs: build
