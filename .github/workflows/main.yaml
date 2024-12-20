@@ -1,0 +1,32 @@
+name: Mi priemra integración continua
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: empaquetado
+      run: echo "Empaquetando la aplicación!"
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: test
+      run: echo "Ejecutando pruebas!"
+
+  qa:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: qa
+      run: echo "Ejecutando análisis de calidad!"
+
+  deploy:
+    needs: qa
+    runs-on: ubuntu-latest
+    steps:
+    - name: deploy
+      run: echo "Desplegando la aplicación!"
