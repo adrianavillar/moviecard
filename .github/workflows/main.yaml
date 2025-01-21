@@ -63,14 +63,15 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Instalar JDK 11
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v4
       with:
         java-version: "11"
-        distribution: "adopt"
+        distribution: "temurin"
+        architecture: "aarch64"
 
     - name: Build with Maven
       run: mvn clean package -DskipTests
 
     - name: Review code quality with Sonarqube
       run: |
-        mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.qualitygate.wait=true -Dsonar.login=admin1 -Dsonar.password=admin1
+        mvn sonar:sonar -Dsonar.host.url=http://localhost:9000 -Dsonar.qualitygate.wait=true -Dsonar.login=admin -Dsonar.password=admin1
