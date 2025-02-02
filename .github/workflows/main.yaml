@@ -95,7 +95,7 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'moviecards-pre-villar'
-          slot-name: 'Staging'
+          slot-name: 'Production'
           package: '*.jar'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_12F11B88D8CE4CA7B28172DF9308BA56G }}
 
