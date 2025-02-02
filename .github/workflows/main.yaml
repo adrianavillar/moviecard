@@ -55,7 +55,7 @@ jobs:
         run: mvn clean verify
 
   qa:
-    needs: build
+    needs: test
     runs-on: self-hosted
     continue-on-error: true
     steps:
