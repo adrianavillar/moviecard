@@ -48,7 +48,7 @@ public class ActorE2ETest {
         assertTrue(driver.findElement(By.id("name")).isDisplayed());
         assertTrue(driver.findElement(By.id("birthDate")).isDisplayed());
         assertTrue(driver.findElement(By.id("country")).isDisplayed());
-        assertTrue(driver.findElement(By.id("deadhDate")).isDisplayed());
+        assertTrue(driver.findElement(By.id("deadDate")).isDisplayed());
 
     }
 
