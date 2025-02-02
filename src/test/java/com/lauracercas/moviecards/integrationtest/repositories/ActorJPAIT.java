@@ -28,7 +28,7 @@ public class ActorJPAIT {
         actor.setName("actor");
         actor.setBirthDate(new Date());
         actor.setCountry("spain");
-        actor.setBirthDate(new Date());
+        actor.setDeadDate(new Date());
 
         Actor savedActor = actorJPA.save(actor);
 
