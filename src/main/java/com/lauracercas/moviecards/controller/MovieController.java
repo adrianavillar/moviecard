@@ -23,6 +23,9 @@ import java.util.List;
 @Controller
 public class MovieController {
 
+    private static final String MOVIE_ATTRIBUTE = "movie";
+    private static final String TITLE_ATTRIBUTE = "title";
+    private static final String MOVIES_FORM_ATTRIBUTE = "movies/form";
     private final MovieService movieService;
 
     public MovieController(MovieService movieService) {
@@ -37,15 +40,15 @@ public class MovieController {
 
     @GetMapping("movies/new")
     public String newMovie(Model model) {
-        model.addAttribute("movie", new Movie());
-        model.addAttribute("title", Messages.NEW_MOVIE_TITLE);
-        return "movies/form";
+        model.addAttribute(MOVIE_ATTRIBUTE, new Movie());
+        model.addAttribute(TITLE_ATTRIBUTE, Messages.NEW_MOVIE_TITLE);
+        return MOVIES_FORM_ATTRIBUTE;
     }
 
     @PostMapping("saveMovie")
     public String saveMovie(@ModelAttribute Movie movie, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "movies/form";
+            return MOVIES_FORM_ATTRIBUTE;
         }
         Movie movieSaved = movieService.save(movie);
         if (movieSaved.getId() != null) {
@@ -54,21 +57,21 @@ public class MovieController {
             model.addAttribute("message", Messages.SAVED_MOVIE_SUCCESS);
         }
 
-        model.addAttribute("movie", movieSaved);
-        model.addAttribute("title", Messages.EDIT_MOVIE_TITLE);
-        return "movies/form";
+        model.addAttribute(MOVIE_ATTRIBUTE, movieSaved);
+        model.addAttribute(TITLE_ATTRIBUTE, Messages.EDIT_MOVIE_TITLE);
+        return MOVIES_FORM_ATTRIBUTE;
     }
 
     @GetMapping("editMovie/{movieId}")
     public String editMovie(@PathVariable Integer movieId, Model model) {
         Movie movie = movieService.getMovieById(movieId);
         List<Actor> actors = movie.getActors();
-        model.addAttribute("movie", movie);
+        model.addAttribute(MOVIE_ATTRIBUTE, movie);
         model.addAttribute("actors", actors);
 
-        model.addAttribute("title", Messages.EDIT_MOVIE_TITLE);
+        model.addAttribute(TITLE_ATTRIBUTE, Messages.EDIT_MOVIE_TITLE);
 
-        return "movies/form";
+        return MOVIES_FORM_ATTRIBUTE;
     }
 
 
